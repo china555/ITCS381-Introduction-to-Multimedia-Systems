@@ -6,7 +6,7 @@ void CreateCMYK(String filename, String outputFilenameNoExt)
   PImage imgCch = createImage(refWidth, refHeight, ALPHA); // RGB, ARGB, ALPHA
   PImage imgMch = createImage(refWidth, refHeight, ALPHA); // RGB, ARGB, ALPHA
   PImage imgYch = createImage(refWidth, refHeight, ALPHA); // RGB, ARGB, ALPHA
- 
+  
   imgOrigin.resize(refWidth, refHeight);
  
   // Load pixel
@@ -44,5 +44,5 @@ void CreateCMYK(String filename, String outputFilenameNoExt)
   image(imgMch, 0, height /2 ); //BL
   image(imgYch, width / 2, height / 2); // BR
   // Save image on the display window
-  save(outputFilenameNoExt+"_CMY_4ch.png");
+  save(outputFilenameNoExt+"_CMYK_4ch.png");
 }
