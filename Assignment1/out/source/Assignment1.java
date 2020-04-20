@@ -1,3 +1,81 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Assignment1 extends PApplet {
+
+// Template for assignment 1
+// Student id: 
+// Name :
+// 
+// Note : Put any note or extra explanation here if you must
+//=========================================================================================================== 
+
+// Please change your image path here or create a sketch folder then add image to data/
+String filename = "Lenna.png"; 
+ImageLib imageLib;
+
+public void setup() {
+  
+  imageLib = new ImageLib(filename);
+  
+  // Processing command to print the PImage on the window
+  // image(imageLib.GetOriginalImg(), 0, 0);
+  
+  // Nearest Neighbour Scaling
+  // imageLib.ResizeNearestNeighbor(1024, 1024);
+  //imageLib.ResizeNearestNeighbor(256, 256);
+  // imageLib.ResizeNearestNeighbor(256, 128);
+  imageLib.ResizeNearestNeighbor(321, 0);
+  
+  //imageLib.ResizeNearestNeighbor(0, 321);
+  
+  // ResizeBilinearInterpolation
+  //imageLib.ResizeBilinearInterpolation(1024, 1024);
+  //imageLib.ResizeBilinearInterpolation(256, 256);
+  //imageLib.ResizeBilinearInterpolation(256, 128);
+  //imageLib.ResizeBilinearInterpolation(321, 0);
+  
+  // ResizeSeamCarvingBasic
+  //imageLib.ResizeSeamCarvingBasic(1024, 1024);
+  //imageLib.ResizeSeamCarvingBasic(256, 256);
+  //imageLib.ResizeSeamCarvingBasic(256, 128);
+  //imageLib.ResizeSeamCarvingBasic(321, 0);
+  
+  // ResizeSeamCarvingAdvance (Extra +2%)
+  //imageLib.ResizeSeamCarvingAdvance(1024, 1024);
+  //imageLib.ResizeSeamCarvingAdvance(256, 256);
+  //imageLib.ResizeSeamCarvingAdvance(256, 128);
+  //imageLib.ResizeSeamCarvingAdvance(321, 0);
+  image(imageLib.GetBufferImg(), 0, 0);
+  // Save original image to file
+  imageLib.SaveImageToFile("Original.png", ImageLib.ORIGINAL);
+  // Save buffer image to file
+  imageLib.SaveImageToFile("Buffer.png", ImageLib.BUFFER);
+  
+  
+  
+  // Template to test Paint Seam with Dummy Data
+  
+  
+  // Seam s = new Seam(512);
+  // s.CreateDummyHorizontal(355);
+  // s.CreateDummyVertical(125);
+  // color red = color(255,0,0);
+  // imageLib.PaintSeam(s, red, ImageLib.ORIGINAL);
+  // image(imageLib.GetOriginalImg(), 0, 0);
+  
+}
 // Please modify this class so it contain required implementation of the assignment
 class ImageLib
 {
@@ -27,29 +105,29 @@ class ImageLib
     UpdateBufferWithOriginalImg();
   }
 
-  PImage GetOriginalImg()
+  public PImage GetOriginalImg()
   { // function for buffer image
     return originalImage;
   }
 
-  PImage GetBufferImg()
+  public PImage GetBufferImg()
   { // function for buffer image
     return bufferImage;
   }
 
-  void UpdateOriginalWithBufferImg()
+  public void UpdateOriginalWithBufferImg()
   { // function for buffer image
     println("UpdateOriginalWithBufferImg()");
     originalImage = bufferImage.get();
   }
 
-  void UpdateBufferWithOriginalImg()
+  public void UpdateBufferWithOriginalImg()
   { // function for buffer image
     println("UpdateBufferWithOriginalImg()");
     bufferImage = originalImage.get();
   }
 
-  void LoadOriginalImageFromFile(String filename)
+  public void LoadOriginalImageFromFile(String filename)
   {
     // Extension must be included in the file name (.jpeg, tiff, targa, .png)
     println("LoadOriginalImageFromFile(param1): param1 = " + filename);
@@ -61,7 +139,7 @@ class ImageLib
     }
   }
 
-  void SaveImageToFile(String filename, int option)
+  public void SaveImageToFile(String filename, int option)
   {   
     // Extension must be included in the file name (.jpeg, tiff, targa, .png)
     println("SaveImageToFile(param1, param2), param2 (option = " + option + ")");
@@ -77,7 +155,7 @@ class ImageLib
     }
   }
 
-  void SaveBufferImageToFile(String filename)
+  public void SaveBufferImageToFile(String filename)
   {
     // Extension must be included in the file name (.jpeg, tiff, targa, .png)
     println("SaveBufferImageToFile(param1), param1 = " + filename);
@@ -91,7 +169,7 @@ class ImageLib
     }
   }
 
-  void SaveOriginalImageToFile(String filename)
+  public void SaveOriginalImageToFile(String filename)
   {
     // Extension must be included in the file name (.jpeg, tiff, targa, .png)
     println("SaveOriginalImageToFile(param1), param1 = " + filename);
@@ -105,7 +183,7 @@ class ImageLib
     }
   }
 
-  void ResizeByProcessing(int newWidth, int newHeight)
+  public void ResizeByProcessing(int newWidth, int newHeight)
   {
     // This function uses original processing operation from PImage
     // Use 0 with number of width or height to resize proportionally
@@ -120,7 +198,7 @@ class ImageLib
   }
 
   // A1-1 Nearest Neighbour Scaling ==================================================================
-  void ResizeNearestNeighbor(int newWidth, int newHeight)
+  public void ResizeNearestNeighbor(int newWidth, int newHeight)
   {
     double x_ratio=0,y_ratio=0;
     double px, py;
@@ -186,7 +264,7 @@ class ImageLib
   }
 
   // A1-2 Bilinear Interpolation Scaling ==================================================================
-  void ResizeBilinearInterpolation(int newWidth, int newHeight)
+  public void ResizeBilinearInterpolation(int newWidth, int newHeight)
   {
     println("ResizeBilinearInterpolation(param1, param2): param1 = " + newWidth + " param2 = " + newHeight); println("Ratio of new image = "+newWidth+" : "+newHeight);
     bufferImage.loadPixels();
@@ -243,7 +321,7 @@ class ImageLib
   }
 
   // A1-3 SeamCarving Scaling ==================================================================
-  void ResizeSeamCarvingBasic(int newWidth, int newHeight){
+  public void ResizeSeamCarvingBasic(int newWidth, int newHeight){
         
     println("ResizeSeamCarving(param1, param2): param1 = " + newWidth + " param2 = " + newHeight);
     //TODO-0: calculated how many seam need to be removed from the original image in both vertical and horizontal
@@ -286,7 +364,7 @@ class ImageLib
 
 
 
-  Seam GetSingleVerticalSeam()
+  public Seam GetSingleVerticalSeam()
   {
     if (bufferImage != null)
     {
@@ -302,7 +380,7 @@ class ImageLib
   
   
 
-  Seam GetSingleHorizontalSeam()
+  public Seam GetSingleHorizontalSeam()
   {
         if (bufferImage != null)
         {
@@ -396,7 +474,7 @@ class ImageLib
     //}
   }
 
-  void RemoveSingleSeam(Seam seam)
+  public void RemoveSingleSeam(Seam seam)
   {
     if (bufferImage != null && seam != null)
     {
@@ -408,7 +486,7 @@ class ImageLib
     }
   }
 
-  void PaintSeam(Seam seam, color c, int option)
+  public void PaintSeam(Seam seam, int c, int option)
   {
     // Replace the originalImage or bufferImage pixel colors on the seam path with input parameter color
     // Useful to display the calculated seam to ensure its validity
@@ -447,7 +525,7 @@ class ImageLib
   }
   
   // A1-3 SeamCarving Scaling Extra ===============
-  void ResizeSeamCarvingAdvance(int newWidth, int newHeight)
+  public void ResizeSeamCarvingAdvance(int newWidth, int newHeight)
   {
     println("ResizeSeamCarvingAdvance(param1, param2): param1 = " + newWidth + " param2 = " + newHeight);
     //TODO: Rather than calculating seam then remove it one-by-one
@@ -459,4 +537,51 @@ class ImageLib
   }
 
   // End of ImageLib Class
+}
+class Seam
+{
+  int pixelIndices[];
+  boolean isHorizontal;
+  
+  int currentIndex;
+  
+  Seam(int size)
+  {
+    this.pixelIndices = new int[size];
+    this.isHorizontal = false;
+    this.currentIndex = 0;
+  }
+  
+  public void CreateDummyHorizontal(int startY)
+  {
+    // Calculated 1D index of the y-coordinate using seam length
+    startY = startY * pixelIndices.length;
+    
+    for(int i = 0; i < pixelIndices.length; i++)
+    {
+      pixelIndices[i] = startY + i;
+    }
+  }
+  
+  public void CreateDummyVertical(int startX)
+  {
+    for(int i = 0; i < pixelIndices.length; i++)
+    {
+      pixelIndices[i] = startX + (i * pixelIndices.length) ;
+    }
+  }
+  
+  public void PrintSeam(){
+    printArray(pixelIndices);
+  }
+}
+  public void settings() {  size(512,512); }
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Assignment1" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }

@@ -14,14 +14,16 @@ void setup() {
   imageLib = new ImageLib(filename);
   
   // Processing command to print the PImage on the window
-  //image(imageLib.GetOriginalImg(), 0, 0);
+  // image(imageLib.GetOriginalImg(), 0, 0);
   
   // Nearest Neighbour Scaling
-  //imageLib.ResizeNearestNeighbor(1024, 1024);
+  // imageLib.ResizeNearestNeighbor(1024, 1024);
   //imageLib.ResizeNearestNeighbor(256, 256);
-  //imageLib.ResizeNearestNeighbor(256, 128);
+  // imageLib.ResizeNearestNeighbor(256, 128);
   imageLib.ResizeNearestNeighbor(321, 0);
-   image(imageLib.GetBufferImg(), 0, 0);
+  
+  //imageLib.ResizeNearestNeighbor(0, 321);
+  
   // ResizeBilinearInterpolation
   //imageLib.ResizeBilinearInterpolation(1024, 1024);
   //imageLib.ResizeBilinearInterpolation(256, 256);
@@ -39,7 +41,7 @@ void setup() {
   //imageLib.ResizeSeamCarvingAdvance(256, 256);
   //imageLib.ResizeSeamCarvingAdvance(256, 128);
   //imageLib.ResizeSeamCarvingAdvance(321, 0);
-  
+  image(imageLib.GetBufferImg(), 0, 0);
   // Save original image to file
   imageLib.SaveImageToFile("Original.png", ImageLib.ORIGINAL);
   // Save buffer image to file
@@ -48,13 +50,13 @@ void setup() {
   
   
   // Template to test Paint Seam with Dummy Data
-  /*
   
-  Seam s = new Seam(512);
-  s.CreateDummyHorizontal(355);
-  s.CreateDummyVertical(125);
-  color red = color(255,0,0);
-  imageLib.PaintSeam(s, red, ImageLib.ORIGINAL);
-  image(imageLib.GetOriginalImg(), 0, 0);
-  */
+  
+  // Seam s = new Seam(512);
+  // s.CreateDummyHorizontal(355);
+  // s.CreateDummyVertical(125);
+  // color red = color(255,0,0);
+  // imageLib.PaintSeam(s, red, ImageLib.ORIGINAL);
+  // image(imageLib.GetOriginalImg(), 0, 0);
+  
 }

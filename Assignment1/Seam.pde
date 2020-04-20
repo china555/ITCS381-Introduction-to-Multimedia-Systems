@@ -7,9 +7,9 @@ class Seam
   
   Seam(int size)
   {
-    pixelIndices = new int[size];
-    isHorizontal = false;
-    currentIndex = 0;
+    this.pixelIndices = new int[size];
+    this.isHorizontal = false;
+    this.currentIndex = 0;
   }
   
   void CreateDummyHorizontal(int startY)
