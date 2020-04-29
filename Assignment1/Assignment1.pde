@@ -20,7 +20,7 @@ void setup() {
   // imageLib.ResizeNearestNeighbor(1024, 1024);
   //imageLib.ResizeNearestNeighbor(256, 256);
   // imageLib.ResizeNearestNeighbor(256, 128);
-  imageLib.ResizeNearestNeighbor(321, 0);
+  // imageLib.ResizeNearestNeighbor(321, 0);
   
   //imageLib.ResizeNearestNeighbor(0, 321);
   
@@ -32,7 +32,7 @@ void setup() {
   
   // ResizeSeamCarvingBasic
   //imageLib.ResizeSeamCarvingBasic(1024, 1024);
-  //imageLib.ResizeSeamCarvingBasic(256, 256);
+  imageLib.ResizeSeamCarvingBasic(256, 256);
   //imageLib.ResizeSeamCarvingBasic(256, 128);
   //imageLib.ResizeSeamCarvingBasic(321, 0);
   
@@ -42,10 +42,10 @@ void setup() {
   //imageLib.ResizeSeamCarvingAdvance(256, 128);
   //imageLib.ResizeSeamCarvingAdvance(321, 0);
   image(imageLib.GetBufferImg(), 0, 0);
-  // Save original image to file
-  imageLib.SaveImageToFile("Original.png", ImageLib.ORIGINAL);
-  // Save buffer image to file
-  imageLib.SaveImageToFile("Buffer.png", ImageLib.BUFFER);
+  // // Save original image to file
+  // imageLib.SaveImageToFile("Original.png", ImageLib.ORIGINAL);
+  // // Save buffer image to file
+  // imageLib.SaveImageToFile("Buffer.png", ImageLib.BUFFER);
   
   
   
@@ -55,7 +55,7 @@ void setup() {
   // Seam s = new Seam(512);
   // s.CreateDummyHorizontal(355);
   // s.CreateDummyVertical(125);
-  // color red = color(255,0,0);
+  // color red = color(255,255,0);
   // imageLib.PaintSeam(s, red, ImageLib.ORIGINAL);
   // image(imageLib.GetOriginalImg(), 0, 0);
   
