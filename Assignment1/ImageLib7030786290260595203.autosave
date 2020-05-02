@@ -144,9 +144,7 @@ class ImageLib
         println(newWidth);
         x_ratio = bufferImage.width / (double)newWidth; //find width ratio
         y_ratio = bufferImage.height / (double)newHeight; //find height ratio
-      } 
-      else if (newHeight == 0) 
-      {
+      } else if (newHeight == 0) {
         // newHeight will be 2 times bigger than newWidth;
         newHeight = newWidth / original_ratio;
         print("height=================================");
@@ -220,7 +218,7 @@ class ImageLib
         // blue element
         blue = blue(a)*(1-x_diff)*(1-y_diff) + blue(b)*(x_diff)*(1-y_diff) + blue(c)*(y_diff)*(1-x_diff) + blue(d)*(x_diff*y_diff);
         blue = constrain(blue, 0, 255);
-        // green element
+
         green = (green(a))*(1-x_diff)*(1-y_diff) + (green(b))*(x_diff)*(1-y_diff) + (green(c))*(y_diff)*(1-x_diff)   + (green(d))*(x_diff*y_diff);
         green = constrain(green, 0, 255);
         // red element
@@ -417,79 +415,43 @@ class ImageLib
         x++;
     }
 
-    //caluculate M matrix
-  PImage M_matrix = createImage(originalImage.width,originalImage.height,ALPHA);
-  M_matrix.loadPixels();
-    x = 0;
-    y = 0;
 
-    for (int i=0; i<originalImage.height*originalImage.width; i++) {
-      if(x == originalImage.width){
-        x = 0;
-        y++;
-      }
-      if(y == 0){  // if the pixel is located in first row, the Min will be 0
-        M_matrix.pixels[i] = energy.pixels[i];
-      }else {
-        if (x == 0) { 
-          // left edge
-          M_matrix.pixels[i] = energy.pixels[i] + min(M_matrix.pixels[i - originalImage.width], M_matrix.pixels[i - originalImage.width + 1]);
-        }else if (x == originalImage.width -1) {
-          // right edge
-          M_matrix.pixels[i] = energy.pixels[i] + min(M_matrix.pixels[i - originalImage.width], M_matrix.pixels[i - originalImage.width - 1]);
-        }else{
-          // middle cells
-          M_matrix.pixels[i] = energy.pixels[i] + min(M_matrix.pixels[i - originalImage.width - 1], M_matrix.pixels[i - originalImage.width], M_matrix.pixels[i - originalImage.width + 1]);
-        }
-      }
-      x++;
-    }
+      // if (x-1 < 0 || y-1 < 0) { // first row or column
+      //   if (y-1 < 0) {
+      //     energy.pixels[i] = calculate_energy(energy.pixels[getPosition_y(x, y)], energy.pixels[getPosition_y(x+1, y)], energy.pixels[getPosition_y(x, y)], energy.pixels[getPosition_y(x, y+1)]);
+      //   } else {
+      //     //println("weea");
+      //     energy.pixels[i] = calculate_energy(energy.pixels[getPosition_y(x, y)], energy.pixels[getPosition_y(x+1, y)], energy.pixels[getPosition_y(x, y-1)], energy.pixels[getPosition_y(x, y+1)]);
+      //   }
+      // } else if (x+1>originalImage.width||y+1>originalImage.height) { // last row or column
+      //   if (y+1>originalImage.height) {
+      //     energy.pixels[i] = calculate_energy(energy.pixels[getPosition_y(x-1, y)], energy.pixels[getPosition_y(x, y)], energy.pixels[getPosition_y(x, y-1)], energy.pixels[getPosition_y(x, y)]);
+      //   } else {
+      //     energy.pixels[i] = calculate_energy(energy.pixels[getPosition_y(x-1, y)], energy.pixels[getPosition_y(x, y)], energy.pixels[getPosition_y(x, y-1)], energy.pixels[getPosition_y(x, y+1)]);
+      //   }
+      // } else { // other
+      //   energy.pixels[i] = calculate_energy(energy.pixels[getPosition_y(x-1, y)], energy.pixels[getPosition_y(x+1, y)], energy.pixels[getPosition_y(x, y-1)], energy.pixels[getPosition_y(x, y+1)]);
+      // }
+      //x++;
+    //}
 
-    
     //TODO-1: resize on the horizontal
     // TODO-1-1: calculated 'vertical seam' to be removed
     // TODO-1-2: Remove the seam then Repeat the process for 1-1
 
-
-      // PImage temprow = createImage(originalImage.width, 1,ALPHA);
-      // temprow.loadPixels();    
-      double temprow[] = new double[]
-      for(int i =0;i<different_Width;i++){
-        for(int y = 0; y < originalImage.height; y++){
-          temprow = []
-          for(int x = 0; x < originalImage.width; x++){
-            if(y != 0){
-              temprow[x] = M_matrix.pixels[y*x];
-            }else{
-              temprow[x] = M_matrix.pixels[x];
-            }
-          }
-          double minimum = temprow[0];
-          for(int l = 1; l < temprow.length; l++){
-            if(temprow[i] < minimum){
-              minimum = temprow[i];
-            }
-          }
-        }
-
-      }
-    }
-
     //TODO-2: resize on the vertical
     // TODO-2-1: calculated 'horizontal seam' to be removed
     // TODO-1-2: Remove the seam then Repeat the process for 1-2
-
-
   }
-  int getPosition_y(int x, int y) 
-  {
+  int getPosition_y(int x, int y) {
     //println(originalImage.width);
     return (y*originalImage.width)+x;
   }
-  int calculate_energy(int x1, int x2, int y1, int y2) 
-  {
+  int calculate_energy(int x1, int x2, int y1, int y2) {
     return abs(x1-x2)/2+abs(y1-y2)/2;
   }
+
+
 
   Seam GetSingleVerticalSeam()
   {
