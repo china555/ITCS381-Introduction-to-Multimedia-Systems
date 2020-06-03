@@ -1,6 +1,6 @@
 // Template for assignment 1
-// Student id: 
-// Name :
+// Student id: 6188086 6188089 6288168
+// Name : Kittikorn Nattawipa Eijiro
 // 
 // Note : Put any note or extra explanation here if you must
 //=========================================================================================================== 
@@ -32,7 +32,7 @@ void setup() {
   
   // ResizeSeamCarvingBasic
   //imageLib.ResizeSeamCarvingBasic(1024, 1024);
-  imageLib.ResizeSeamCarvingBasic(256, 256);
+   imageLib.ResizeSeamCarvingBasic(256, 256);
   //imageLib.ResizeSeamCarvingBasic(256, 128);
   //imageLib.ResizeSeamCarvingBasic(321, 0);
   
@@ -41,22 +41,22 @@ void setup() {
   //imageLib.ResizeSeamCarvingAdvance(256, 256);
   //imageLib.ResizeSeamCarvingAdvance(256, 128);
   //imageLib.ResizeSeamCarvingAdvance(321, 0);
-  image(imageLib.GetBufferImg(), 0, 0);
-  // // Save original image to file
-  // imageLib.SaveImageToFile("Original.png", ImageLib.ORIGINAL);
-  // // Save buffer image to file
-  // imageLib.SaveImageToFile("Buffer.png", ImageLib.BUFFER);
+   //image(imageLib.GetBufferImg(), 0, 0);
+  //  // Save original image to file
+    imageLib.SaveImageToFile("Original.png", ImageLib.ORIGINAL);
+  //  // Save buffer image to file
+    imageLib.SaveImageToFile("Buffer.png", ImageLib.BUFFER);
   
   
   
   // Template to test Paint Seam with Dummy Data
   
   
-  // Seam s = new Seam(512);
-  // s.CreateDummyHorizontal(355);
-  // s.CreateDummyVertical(125);
-  // color red = color(255,255,0);
-  // imageLib.PaintSeam(s, red, ImageLib.ORIGINAL);
-  // image(imageLib.GetOriginalImg(), 0, 0);
+  //Seam s = new Seam(512);
+  //s.CreateDummyHorizontal(355);
+  //s.CreateDummyVertical(244);
+  //color red = color(255,255,0);
+  //imageLib.PaintSeam(s, red, ImageLib.ORIGINAL);
+  //image(imageLib.GetOriginalImg(), 0, 0);
   
 }

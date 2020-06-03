@@ -345,7 +345,7 @@ class ImageLib
   //    //TODO-2: resize on the vertical
   //    // TODO-2-1: calculated 'horizontal seam' to be removed
   //}
-
+  int count =0;
   // A1-3 SeamCarving Scaling ==================================================================
   void ResizeSeamCarvingBasic(int newWidth, int newHeight)
   {
@@ -355,7 +355,7 @@ class ImageLib
     int different_Height = originalImage.height - newHeight;
     int different_Width = originalImage.width - newWidth;
     PImage energy = createImage(originalImage.width,originalImage.height, ALPHA); // RGB, ARGB, ALPHA
-    int count =0;
+    count =0;
     energy.loadPixels();
     for (int i=0; i<bufferImage.height*bufferImage.width; i++) {
       float r = red(bufferImage.pixels[i]);
@@ -449,31 +449,28 @@ class ImageLib
     //TODO-1: resize on the horizontal
     // TODO-1-1: calculated 'vertical seam' to be removed
     // TODO-1-2: Remove the seam then Repeat the process for 1-1
+    // PImage Temp = createImage(width,height,ALPHA);
+    ArrayList<Seam> allSeam = new ArrayList<Seam>();
+    int minIndexSeam[] = new int[originalImage.width];
+    count = 0;
+    int countIndexSeam =0;
 
+     while (count < originalImage.width * originalImage.height) {
+      minIndexSeam[countIndexSeam] = getArrayChunk(M_matrix,minIndexSeam,count);
+      //print(minIndexSeam[countIndexSeam]+" ");
+      count = count + height;
+      countIndexSeam++;
+     }
+     print();
+      allSeam.add(GetSingleVerticalSeam(minIndexSeam));
+      //Seam s = new Seam(512);
+      //s.CreateDummyVertical(200);
+      color red = color(255,0,0);
+      imageLib.PaintSeam(allSeam.get(0), red, ImageLib.BUFFER);
+      image(imageLib.GetBufferImg(), 0, 0);
+    
+    
 
-      // PImage temprow = createImage(originalImage.width, 1,ALPHA);
-      // temprow.loadPixels();    
-      double temprow[] = new double[]
-      for(int i =0;i<different_Width;i++){
-        for(int y = 0; y < originalImage.height; y++){
-          temprow = []
-          for(int x = 0; x < originalImage.width; x++){
-            if(y != 0){
-              temprow[x] = M_matrix.pixels[y*x];
-            }else{
-              temprow[x] = M_matrix.pixels[x];
-            }
-          }
-          double minimum = temprow[0];
-          for(int l = 1; l < temprow.length; l++){
-            if(temprow[i] < minimum){
-              minimum = temprow[i];
-            }
-          }
-        }
-
-      }
-    }
 
     //TODO-2: resize on the vertical
     // TODO-2-1: calculated 'horizontal seam' to be removed
@@ -481,23 +478,16 @@ class ImageLib
 
 
   }
-  int getPosition_y(int x, int y) 
-  {
-    //println(originalImage.width);
-    return (y*originalImage.width)+x;
-  }
-  int calculate_energy(int x1, int x2, int y1, int y2) 
-  {
-    return abs(x1-x2)/2+abs(y1-y2)/2;
-  }
 
-  Seam GetSingleVerticalSeam()
+  Seam GetSingleVerticalSeam(int[] min)
   {
     if (bufferImage != null)
     {
       // TODO: Calculate 1 single vertical seam
-
       Seam newSeam = new Seam(bufferImage.height);
+      for(int i=0;i<min.length;i++){
+        newSeam.pixelIndices[i] = min[i];
+      }
       return newSeam;
     } else { 
       println("Error: bufferImage is null"); 
@@ -531,6 +521,29 @@ class ImageLib
     } else { 
       println("Error: bufferImage or seam is null");
     }
+  }
+  
+    int getArrayChunk(PImage M_matrix,int minIndexSeam[], int count) {
+    int min = M_matrix.pixels[count];
+    int index = count;
+    for (int i = count; i < count + height; i++) {
+      if(min > M_matrix.pixels[i]){
+          min = M_matrix.pixels[i];
+          index = i;
+      }
+    }
+    return index;
+}
+
+  int getPosition_y(int x, int y) 
+  {
+    //println(originalImage.width);
+    return (y*originalImage.width)+x;
+  }
+
+  int calculate_energy(int x1, int x2, int y1, int y2) 
+  {
+    return abs(x1-x2)/2+abs(y1-y2)/2;
   }
 
   void PaintSeam(Seam seam, color c, int option)

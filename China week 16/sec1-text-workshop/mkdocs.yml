@@ -1,0 +1,8 @@
+site_name: China Nongnam
+nav:
+  - Home: index.md
+  - Syntax: syntax.md
+  - China555: china555.md
+theme: readthedocs
+
+

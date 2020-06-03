@@ -30,6 +30,13 @@ class Seam
       pixelIndices[i] = startX + (i * pixelIndices.length) ;
     }
   }
+  void CreateDummyVertical(int bestSeam[]){
+        for(int i = 0; i < bestSeam.length; i++)
+        {
+          pixelIndices[i] = bestSeam[i] ;
+          //println(pixelIndices[i]);
+        }
+  }
   
   void PrintSeam(){
     printArray(pixelIndices);
