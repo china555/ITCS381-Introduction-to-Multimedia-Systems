@@ -6,7 +6,7 @@
 //=========================================================================================================== 
 
 // Please change your image path here or create a sketch folder then add image to data/
-String filename = "Lenna.png"; 
+String filename = "view.jpg"; 
 ImageLib imageLib;
 
 void setup() {
@@ -15,12 +15,21 @@ void setup() {
   
   // Processing command to print the PImage on the window
   // image(imageLib.GetOriginalImg(), 0, 0);
-  
+  int size[] = {1024,256,256,321};
+  int size2[] = {1024,256,128,0};
+    for (int i =0;i<4;i++){
+    imageLib.ResizeBilinearInterpolation(size[i], size2[i]);
+   // imageLib.ResizeNearestNeighbor(256, 256);
+   //imageLib.ResizeNearestNeighbor(256, 128);
+   //imageLib.ResizeNearestNeighbor(321, 0);
+   imageLib.SaveImageToFile("Buffer"+i+".png", ImageLib.BUFFER);
+  }
   // Nearest Neighbour Scaling
-  // imageLib.ResizeNearestNeighbor(1024, 1024);
-  //imageLib.ResizeNearestNeighbor(256, 256);
-  // imageLib.ResizeNearestNeighbor(256, 128);
-  // imageLib.ResizeNearestNeighbor(321, 0);
+   // imageLib.ResizeNearestNeighbor(1024, 1024);
+   // imageLib.ResizeNearestNeighbor(256, 256);
+   //imageLib.ResizeNearestNeighbor(256, 128);
+   //imageLib.ResizeNearestNeighbor(321, 0);
+   //imageLib.SaveImageToFile("Buffer"+i+".png", ImageLib.BUFFER);
   
   //imageLib.ResizeNearestNeighbor(0, 321);
   
@@ -32,7 +41,7 @@ void setup() {
   
   // ResizeSeamCarvingBasic
   //imageLib.ResizeSeamCarvingBasic(1024, 1024);
-   imageLib.ResizeSeamCarvingBasic(256, 256);
+   //imageLib.ResizeSeamCarvingBasic(256, 256);
   //imageLib.ResizeSeamCarvingBasic(256, 128);
   //imageLib.ResizeSeamCarvingBasic(321, 0);
   
@@ -41,11 +50,10 @@ void setup() {
   //imageLib.ResizeSeamCarvingAdvance(256, 256);
   //imageLib.ResizeSeamCarvingAdvance(256, 128);
   //imageLib.ResizeSeamCarvingAdvance(321, 0);
-   //image(imageLib.GetBufferImg(), 0, 0);
+   image(imageLib.GetBufferImg(), 0, 0);
   //  // Save original image to file
     imageLib.SaveImageToFile("Original.png", ImageLib.ORIGINAL);
   //  // Save buffer image to file
-    imageLib.SaveImageToFile("Buffer.png", ImageLib.BUFFER);
   
   
   

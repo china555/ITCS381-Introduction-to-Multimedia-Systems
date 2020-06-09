@@ -243,108 +243,6 @@ class ImageLib
     println("ResizeBilinearInterpolation(param1, param2): param1 = " + newWidth + " param2 = " + newHeight);
   }
 
-  //  // A1-3 SeamCarving Scaling ==================================================================
-  //  void ResizeSeamCarvingBasic(int newWidth, int newHeight){
-
-  //    println("ResizeSeamCarving(param1, param2): param1 = " + newWidth + " param2 = " + newHeight);
-  //    //TODO-0: calculated how many seam need to be removed from the original image in both vertical and horizontal
-
-  //    // putting seam
-  //    // newWidth > original width, newheight > original height
-
-  //    // putting and removing seam
-  //    // newwidth > original width, newheight < original height
-  //    // newwidth < original width, newheight > original height
-
-  //    //remove seam
-  //    // newwidth < original width, newheight < original height
-  //     int vertical_difference = bufferImage.width - newWidth; // the different number of Pixels means 
-  //     int horizontal_difference = bufferImage.height - newHeight; //the number of seam we need to remove
-
-  //    //TODO-1: resize on the horizontal
-  //    // TODO-1-1: calculated 'vertical seam' to be removed
-  //    for(int i = 0; i < horizontal_difference; i++){
-  //      double energy[][] = new double[bufferImage.height][bufferImage.width]; 
-  //    }
-
-  //      double brightness[][] = new double[bufferImage.height][bufferImage.width];
-  //      int index = 0;
-  //      for(int hei = 0; hei < bufferImage.height; hei++)
-  //      {
-  //          for(int wid = 0;wid<bufferImage.width;wid++)
-  //          {
-  //            double r = red(originalImage.pixels[index]);
-  //            double g = green(originalImage.pixels[index]);
-  //            double b = blue(originalImage.pixels[index]);
-  //            double y = constrain( (0.2126*r) + (0.7152*g) + (0.0722*b), 0, 255);
-  //            brightness.pixels[hei][wid] = color( constrain(y, 0, 255) );
-  //            // brightness[hei][wid] = (red(bufferImage.Pixels[index]) + green(bufferImage.Pixels[index]) + blue(bufferImage.Pixels[index])) / 3;
-  //            index++;
-  //          }
-
-  //      }
-
-  //      // calculating energy
-  //      for(int hei = 0; hei < bufferImage.height; hei++)
-  //      {
-  //        for(int wid = 0; wid<bufferImage.width;wid++)
-  //        {    //top row  i=0
-  //          if(hei == 0){
-  //            //left side  j=0
-  //            if(wid == 0){
-  //              energy[hei][wid] = abs(brightness[hei][wid + 1] - brightness[hei][wid])/2 + abs(brightness[hei + 1][widt])/2;
-  //            }
-  //            //center
-  //            else if(wid == bufferImage.width -1){
-  //              energy[hei][wid] = abs(brightness=[hei][wid -1] - brightness[hei][wid])/2 + abs(brightness[hei + 1][wid] - brightness[hei][wid])/2;
-  //            }
-  //            //right side j = maxwidth-1
-  //            else{
-  //              energy[hei][wid] = abs(brightness[hei][wid + 1] - brightness[hei][wid - 1])/2 + abs(brightness[hei + 1][wid] - brightness[hei][wid])/2;
-  //            }
-  //          }          
-  //          //bottom row i = maxheight -1
-  //          else if(hei == bufferImage.height -1){
-  //            //left side j = 0
-  //            if(wid == 0){
-  //              energy[hei][wid] = abs(brightness[hei][wid + 1] - brightness[hei][wid])/2 + abs(brightness[hei -1][wid] - brightness[hei][wid])/2;
-  //            }
-  //            //right side j = maxwidth - 1
-  //            else if(wid == bufferImage.width -1){
-  //              energy[hei][wid] = abs(brightness[hei][wid - 1] - brightness[hei][wid])/2 + abs(brightness[hei -1][wid] - brightness[hei][wid])/2;          
-  //            }
-  //            //center
-  //            else{
-  //              energy[hei][wid] = abs(brightness[hei][wid -1] - brightness[hei][wid + 1])/2 + abs(brightness[hei -1][wid] - brightness[hei][wid])/2;
-  //            }
-  //          }
-  //          //middle row i = 1 ~ maxheight -2
-  //          else{
-  //            //left side j = 0
-  //            if(wid == 0){
-  //              energy[hei][wid] = abs(brightness[hei -1][wid] - brightness[hei + 1][wid])/2 + abs(brightness[hei][wid +1] - brightness[hei][wid -1])/2;
-  //            }
-  //            //right side j = maxwidth-1
-  //            else if(wid == bufferImage.width - 1){
-  //              energy[hei][wid] = abs(brightness[hei -1][wid] - brightness[hei +1][wid])/2 + abs(brightness[hei][wid -1] - brightness[hei][wid])/2;
-  //            }
-  //            //center
-  //            else{
-  //              energy[hei][wid] = abs(brightness[hei - 1][wid] - brightness[hei + 1][wid])/2 + abs(brightness[hei][wid -1] - brightness[hei][wid +1])/2;
-  //            }
-  //          }
-  //          index++;
-  //        }
-
-  //      }
-
-
-  //      RemoveSingleSeam(GetSingleVerticalSeam());
-  //      bufferImage.updatePixels();
-
-  //    //TODO-2: resize on the vertical
-  //    // TODO-2-1: calculated 'horizontal seam' to be removed
-  //}
   int count =0;
   // A1-3 SeamCarving Scaling ==================================================================
   void ResizeSeamCarvingBasic(int newWidth, int newHeight)
@@ -444,7 +342,6 @@ class ImageLib
       }
       x++;
     }
-
     
     //TODO-1: resize on the horizontal
     // TODO-1-1: calculated 'vertical seam' to be removed
@@ -469,13 +366,9 @@ class ImageLib
       imageLib.PaintSeam(allSeam.get(0), red, ImageLib.BUFFER);
       image(imageLib.GetBufferImg(), 0, 0);
     
-    
-
-
     //TODO-2: resize on the vertical
     // TODO-2-1: calculated 'horizontal seam' to be removed
     // TODO-1-2: Remove the seam then Repeat the process for 1-2
-
 
   }
 
